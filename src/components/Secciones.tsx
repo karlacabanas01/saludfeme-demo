@@ -392,21 +392,21 @@ export function Areas() {
 
           <div className="relative text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/90 px-4 py-1.5 font-titulo text-[0.72rem] font-bold uppercase tracking-[0.16em] text-rosa-650 backdrop-blur-sm">
-              <span aria-hidden className="animate-respirar">🌿</span>
-              Próximamente
+              <span aria-hidden className="animate-respirar">🪫</span>
+              Loading
             </span>
 
             <p className="texto-hero-grande mx-auto mt-5 max-w-lg font-titulo text-[clamp(1.3rem,2.6vw,1.75rem)] font-bold leading-snug text-white">
-              Algo nuevo está por comenzar en {CONTACTO.marca}
+              Especialista en Método Sintotérmico
             </p>
 
             <p className="texto-hero mx-auto mt-3 max-w-md text-[1rem] font-semibold leading-relaxed text-white">
-              Me estoy formando para acompañarte desde una mirada aún más
-              integral, consciente y natural de tu salud.
+              Actualmente me estoy formando para acompañarte desde una mirada
+              más natural e integral de tu salud.
             </p>
 
-            <p className="texto-hero mt-5 font-mano text-[1.45rem] leading-tight text-white">
-              Muy pronto te cuento más ✨
+            <p className="texto-hero mt-5 text-[1.5rem] leading-tight tracking-[0.2em]">
+              <span aria-hidden>🌱🌡️💧📚</span>
             </p>
           </div>
         </aside>

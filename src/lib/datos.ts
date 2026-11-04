@@ -51,6 +51,15 @@ export type Sede = {
   referencia?: string;
 };
 
+/**
+ * Ciudades donde atiende sin consulta propia publicada.
+ *
+ * No entran en SEDES porque no tienen dirección ni mapa que mostrar: la
+ * hora y el lugar se coordinan por WhatsApp. Anunciarlas igual importa,
+ * porque alguien de ahí no buscaría a una matrona de Talca.
+ */
+export const CIUDADES_SIN_DIRECCION = ["Linares"];
+
 export const SEDES: Sede[] = [
   {
     id: "talca",
@@ -75,7 +84,7 @@ export const MODALIDADES_ATENCION = [
     duracion: 60,
     precio: 30000,
     control: { precio: 25000, duracion: 20 },
-    descripcion: "En mi consulta en Talca, en un espacio confidencial y cómodo.",
+    descripcion: "En mi consulta en Talca o coordinando en Linares, en un espacio confidencial y cómodo.",
   },
   {
     id: "online",
@@ -144,8 +153,7 @@ export const SERVICIOS: Servicio[] = [
     categoria: "Consultas y controles",
     descripcion:
       "Evaluación de tu salud ginecológica, con orientación e indicación de exámenes cuando corresponda.",
-    precio: 30000,
-    precioOnline: 25000,
+    precio: 25000,
     modalidades: ["presencial", "online"],
     aviso:
       "No realizo ecografías, pero entrego la orden en la consulta. No incluye el procesamiento de exámenes por el laboratorio.",
@@ -157,8 +165,7 @@ export const SERVICIOS: Servicio[] = [
     categoria: "Consultas y controles",
     descripcion:
       "Seguimiento de tu embarazo con acompañamiento cercano en cada etapa.",
-    precio: 30000,
-    precioOnline: 25000,
+    precio: 25000,
     modalidades: ["presencial", "online"],
     aviso: "No realizo ecografías, pero entrego la orden en la consulta.",
     incluye:
@@ -171,8 +178,7 @@ export const SERVICIOS: Servicio[] = [
     categoria: "Consultas y controles",
     descripcion:
       "Preparación de tu salud antes de buscar un embarazo: exámenes, suplementación y resolución de dudas.",
-    precio: 30000,
-    precioOnline: 25000,
+    precio: 25000,
     modalidades: ["presencial", "online"],
     incluye: "Puedes venir acompañada de tu pareja.",
     etiquetaIncluye: false,
@@ -550,7 +556,7 @@ export const FAQS = [
   },
   {
     p: "¿Atiendes presencialmente?",
-    r: "Sí, en Talca: Centro Kuyentun, Edificio Espacio Talca, 2 Sur con 2 Oriente, piso 13, oficina 1315.",
+    r: "Sí. Mi consulta está en Talca: Centro Kuyentun, Edificio Espacio Talca, 2 Sur con 2 Oriente, piso 13, oficina 1315. También atiendo en Linares; escríbeme por WhatsApp y coordinamos el lugar y la hora.",
   },
   {
     p: "¿Realizas consultas online?",
@@ -582,7 +588,7 @@ export const FAQS = [
   },
   {
     p: "¿Qué exámenes puedes tomarme en la consulta?",
-    r: "En consulta tomo Papanicolau, tipificación de VPH, panel de ITS, cultivo de flujo vaginal y SGB en embarazada. La toma no tiene costo adicional dentro de la consulta, pero el análisis lo cobra el laboratorio. Escríbeme por WhatsApp para conocer el valor y la disponibilidad.",
+    r: "En Talca y en Linares tomo Papanicolau, tipificación de VPH, panel de ITS, cultivo de flujo vaginal y SGB en embarazada. La toma no tiene costo adicional dentro de la consulta, pero el análisis lo cobra el laboratorio. Escríbeme por WhatsApp para conocer el valor y la disponibilidad.",
   },
   {
     p: "¿Revisas los exámenes solicitados de manera gratuita?",
