@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Inter, Caveat } from "next/font/google";
 import "./globals.css";
-import { CONTACTO, SEDES, SITIO_URL as SITIO } from "@/lib/datos";
+import { CIUDADES_SIN_DIRECCION, CONTACTO, SEDES, SITIO_URL as SITIO } from "@/lib/datos";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,13 +27,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITIO),
   title: {
-    default: `${CONTACTO.marca} — Matrona en Talca`,
+    default: `${CONTACTO.marca} — Matrona en Talca y Linares`,
     template: `%s | ${CONTACTO.marca}`,
   },
   description:
-    "Matrona en Talca. Salud ginecológica, sexología, anticoncepción, control de embarazo, climaterio y procedimientos. Atención online a todo Chile.",
+    "Matrona en Talca y Linares. Salud ginecológica, sexología, anticoncepción, control de embarazo, climaterio y procedimientos. Atención online a todo Chile.",
   keywords: [
     "matrona Talca",
+    "matrona Linares",
     "sexóloga Talca",
     "inserción DIU Talca",
     "implante anticonceptivo Talca",
@@ -49,9 +50,9 @@ export const metadata: Metadata = {
     locale: "es_CL",
     url: SITIO,
     siteName: CONTACTO.marca,
-    title: `${CONTACTO.marca} — Matrona en Talca`,
+    title: `${CONTACTO.marca} — Matrona en Talca y Linares`,
     description:
-      "Tu salud, tu espacio, tus decisiones. Atención en Talca y online.",
+      "Tu salud, tu espacio, tus decisiones. Atención en Talca, Linares y online.",
     images: [
       {
         url: "/og.png",
@@ -89,7 +90,12 @@ function DatosEstructurados() {
       addressRegion: "Región del Maule",
       addressCountry: "CL",
     })),
-    areaServed: SEDES.map((s) => s.ciudad),
+    // `address` son las direcciones reales; `areaServed`, dónde atiende.
+    // Linares va solo aquí: no hay consulta con dirección publicada.
+    areaServed: [
+      ...SEDES.map((s) => s.ciudad),
+      ...CIUDADES_SIN_DIRECCION,
+    ],
     medicalSpecialty: "Obstetric",
     priceRange: "$$",
   };

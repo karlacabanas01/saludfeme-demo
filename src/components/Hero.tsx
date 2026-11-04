@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { MapPin, Monitor } from "lucide-react";
-import { CONTACTO, TRAYECTORIA_CIFRAS } from "@/lib/datos";
+import { CIUDADES_SIN_DIRECCION, CONTACTO, TRAYECTORIA_CIFRAS } from "@/lib/datos";
 import { useAgenda } from "./AgendaProvider";
 
 
@@ -128,6 +128,12 @@ export default function Hero() {
                 <MapPin size={16} strokeWidth={2.5} aria-hidden />
                 Talca
               </li>
+              {CIUDADES_SIN_DIRECCION.map((c) => (
+                <li key={c} className="flex items-center gap-1.5">
+                  <MapPin size={16} strokeWidth={2.5} aria-hidden />
+                  {c}
+                </li>
+              ))}
               <li className="flex items-center gap-1.5">
                 <Monitor size={16} strokeWidth={2.5} aria-hidden />
                 Online a todo Chile

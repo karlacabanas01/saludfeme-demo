@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CONTACTO, SEDES } from "@/lib/datos";
+import { CIUDADES_SIN_DIRECCION, CONTACTO, SEDES } from "@/lib/datos";
 
 const IconoUbicacion = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -124,6 +124,36 @@ export default function Contacto() {
                   </a>
                 </div>
               </div>
+
+              {/* Ciudades sin consulta propia: se anuncian porque alguien de
+                  ahí no buscaría a una matrona de Talca, pero el lugar y la
+                  hora se coordinan por WhatsApp. */}
+              {CIUDADES_SIN_DIRECCION.length > 0 && (
+                <div className="border-t border-gris-claro pt-3 md:pt-4">
+                  <div className="flex items-start gap-3 md:gap-4">
+                    <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-rosa-100 text-magenta-600 md:size-11 md:rounded-xl">
+                      <IconoUbicacion />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="mb-0.5 text-[0.98rem] md:text-base">
+                        También atiendo en{" "}
+                        {CIUDADES_SIN_DIRECCION.join(" y ")}
+                      </h3>
+                      <p className="text-[0.88rem] leading-snug text-gris md:text-[0.9rem]">
+                        Escríbeme y coordinamos el lugar y la hora.
+                      </p>
+                      <a
+                        href={wa}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-11 items-center text-[0.86rem] font-semibold text-magenta-600 underline md:text-[0.88rem]"
+                      >
+                        Consultar por WhatsApp
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="border-t border-gris-claro pt-3 md:pt-4">
                 <div className="flex items-start gap-3 md:gap-4">
