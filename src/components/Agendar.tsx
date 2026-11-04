@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Calendario from "./Calendario";
 import {
-  SERVICIOS, SEDES, precioCLP, duracionDe, precioDe,
+  SERVICIOS, SEDES, CATEGORIAS, precioCLP, duracionDe, precioDe,
   CONTACTO, type Servicio,
 } from "@/lib/datos";
 import {
@@ -199,8 +199,8 @@ export default function Agendar({ enModal, servicioInicial, onCerrar }: Props = 
           servicioId: servicio.id,
           fecha: dia,
           hora,
-          // La etiqueta de modalidad ya lleva la ciudad, pero el servidor
-          // necesita estos dos para calcular el valor de la sede.
+          // La etiqueta de modalidad ya lleva la ciudad; el servidor usa
+          // estos dos campos para registrar dónde será la atención.
           modalidadId: modalidad,
           sede: modalidad === "presencial" ? sede : undefined,
           modalidad:
@@ -281,37 +281,56 @@ export default function Agendar({ enModal, servicioInicial, onCerrar }: Props = 
               <div className="animate-aparecer">
                 <h3 className="text-xl">¿Qué necesitas?</h3>
                 <p className="mb-6 text-[0.93rem] text-gris">
-                  Elige el servicio y, en el paso siguiente, dónde quieres
-                  atenderte: el valor depende de la sede.
+                  Elige el servicio y en el paso siguiente verás el valor,
+                  según sea presencial u online.
                 </p>
-                <div className="flex flex-col gap-3">
-                  {SERVICIOS.map((s) => (
-                    <button
-                      key={s.id}
-                      type="button"
-                      onClick={() => elegirServicio(s)}
-                      className="flex w-full items-center gap-4 rounded-2xl border-2 border-gris-claro bg-white p-4 text-left transition-all hover:border-rosa-200 hover:bg-rosa-50"
-                    >
-                      <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-xl bg-rosa-100 text-xl">
-                        {s.icono}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span className="block font-titulo font-semibold">{s.nombre}</span>
-                        <span className="block truncate text-[0.83rem] text-gris">
-                          {s.precioNota
-                            ? "Valor variable"
-                            : s.modalidades.includes("online")
-                              ? "Presencial u online"
-                              : "Solo presencial"}
-                        </span>
-                      </span>
-                      <span aria-hidden className="shrink-0 text-gris">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                          <path d="m9 18 6-6-6-6" />
-                        </svg>
-                      </span>
-                    </button>
-                  ))}
+                {/* Agrupado por categoría: diecinueve servicios seguidos
+                    eran una lista larguísima donde costaba ubicarse. */}
+                <div className="flex flex-col gap-5">
+                  {CATEGORIAS.map((cat) => {
+                    const deLaCategoria = SERVICIOS.filter(
+                      (x) => x.categoria === cat
+                    );
+                    if (deLaCategoria.length === 0) return null;
+                    return (
+                      <div key={cat}>
+                        <p className="mb-2 font-titulo text-[0.78rem] font-bold uppercase tracking-[0.12em] text-magenta-600">
+                          {cat}
+                        </p>
+                        <div className="flex flex-col gap-2">
+                          {deLaCategoria.map((s) => (
+                            <button
+                              key={s.id}
+                              type="button"
+                              onClick={() => elegirServicio(s)}
+                              className="flex w-full items-center gap-3 rounded-xl border border-gris-claro bg-white px-3 py-2.5 text-left transition-all hover:border-magenta-500 hover:bg-rosa-50"
+                            >
+                              <span aria-hidden className="grid size-9 shrink-0 place-items-center rounded-lg bg-rosa-100 text-base">
+                                {s.icono}
+                              </span>
+                              <span className="min-w-0 flex-1">
+                                <span className="block font-titulo text-[0.92rem] font-semibold leading-snug">
+                                  {s.nombre}
+                                </span>
+                                <span className="block truncate text-[0.78rem] text-gris">
+                                  {s.precioNota
+                                    ? "Valor variable"
+                                    : s.modalidades.includes("online")
+                                      ? "Presencial u online"
+                                      : "Solo presencial"}
+                                </span>
+                              </span>
+                              <span aria-hidden className="shrink-0 text-gris">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                                  <path d="m9 18 6-6-6-6" />
+                                </svg>
+                              </span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
@@ -431,7 +450,7 @@ export default function Agendar({ enModal, servicioInicial, onCerrar }: Props = 
 
                 {modalidad === "presencial" && !sede && (
                   <p className="mb-4 rounded-xl bg-rosa-50 p-4 text-center text-[0.88rem] leading-relaxed text-gris">
-                    Elige una sede para ver el valor y las horas disponibles.
+                    Elige dónde quieres atenderte para ver las horas disponibles.
                   </p>
                 )}
 
