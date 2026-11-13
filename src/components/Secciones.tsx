@@ -767,52 +767,70 @@ export function Talleres() {
   return (
     <section id="talleres" className="bg-white py-16 lg:py-20">
       <div className="mx-auto max-w-4xl px-5">
-        <div className="overflow-hidden rounded-3xl border border-rosa-200 bg-rosa-50 p-6 md:p-10">
-          <div className="flex flex-col items-center text-center">
-            <span
-              aria-hidden
-              className="grid size-14 place-items-center rounded-2xl bg-white text-2xl shadow-suave"
-            >
-              🎓
-            </span>
+        <div className="overflow-hidden rounded-3xl border border-rosa-200 bg-rosa-50">
+          {/* Dos columnas en escritorio: la fotografía muestra de qué se
+              trata mucho antes que el texto. En móvil va arriba, con menos
+              altura para no empujar el contenido fuera de pantalla. */}
+          <div className="grid items-stretch md:grid-cols-[0.85fr_1.15fr]">
+            {/* El collage es vertical (900x1600). En móvil se muestra entero
+                —recortarlo a un marco apaisado parte las caras— y en
+                escritorio llena su columna, donde la proporción ya calza. */}
+            <div className="relative aspect-[9/16] w-full max-w-sm justify-self-center md:aspect-auto md:max-w-none md:min-h-[30rem]">
+              <Image
+                src="/talleres.jpeg"
+                alt={`${CONTACTO.nombre} impartiendo un taller educativo`}
+                fill
+                sizes="(min-width: 768px) 40vw, 24rem"
+                className="object-cover object-center"
+              />
+            </div>
 
-            <h2 className="mt-4 text-[clamp(1.45rem,2.8vw,2rem)]">
-              ¿Buscas talleres y charlas educativas?
-            </h2>
+            <div className="flex flex-col items-center p-6 text-center md:items-start md:p-10 md:text-left">
+              <span
+                aria-hidden
+                className="grid size-14 place-items-center rounded-2xl bg-white text-2xl shadow-suave"
+              >
+                🎓
+              </span>
 
-            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-gris md:text-base">
-              Realizo talleres y charlas para{" "}
-              <strong className="font-semibold text-carbon">
-                {TALLERES.destinatarios}
-              </strong>
-              , adaptados a las necesidades de cada grupo.
-            </p>
+              <h2 className="mt-4 text-[clamp(1.45rem,2.8vw,2rem)]">
+                ¿Buscas talleres y charlas educativas?
+              </h2>
 
-            <ul className="mt-5 flex flex-wrap justify-center gap-2">
-              {TALLERES.temas.map((t) => (
-                <li
-                  key={t}
-                  className="rounded-full border border-rosa-200 bg-white px-3.5 py-1.5 text-[0.82rem] font-semibold text-magenta-600"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
+              <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-gris md:text-base">
+                Realizo talleres y charlas para{" "}
+                <strong className="font-semibold text-carbon">
+                  {TALLERES.destinatarios}
+                </strong>
+                , adaptados a las necesidades de cada grupo.
+              </p>
 
-            <p className="mt-4 text-[0.86rem] text-gris">
-              Entre otros temas · Presencial u online
-            </p>
+              <ul className="mt-5 flex flex-wrap justify-center gap-2 md:justify-start">
+                {TALLERES.temas.map((t) => (
+                  <li
+                    key={t}
+                    className="rounded-full border border-rosa-200 bg-white px-3.5 py-1.5 text-[0.82rem] font-semibold text-magenta-600"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
 
-            <a
-              href={`mailto:${CONTACTO.email}?subject=${asunto}&body=${cuerpo}`}
-              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-magenta-600 px-7 font-titulo text-[0.92rem] font-semibold text-white shadow-media transition-transform hover:-translate-y-0.5"
-            >
-              Solicitar información
-            </a>
+              <p className="mt-4 text-[0.86rem] text-gris">
+                Entre otros temas · Presencial u online
+              </p>
 
-            <p className="mt-3 break-all text-[0.84rem] text-gris">
-              {CONTACTO.email}
-            </p>
+              <a
+                href={`mailto:${CONTACTO.email}?subject=${asunto}&body=${cuerpo}`}
+                className="mt-6 inline-flex min-h-11 items-center justify-center rounded-full bg-magenta-600 px-7 font-titulo text-[0.92rem] font-semibold text-white shadow-media transition-transform hover:-translate-y-0.5"
+              >
+                Solicitar información
+              </a>
+
+              <p className="mt-3 break-all text-[0.84rem] text-gris">
+                {CONTACTO.email}
+              </p>
+            </div>
           </div>
         </div>
       </div>
